@@ -2,13 +2,17 @@
   "nextId": 5,
   "files": [
     {
-      "id": 3,
-      "name": "elif.txt",
-      "text": "!txet"
+      "text": "this is my text 4",
+      "age": 35,
+      "name": "Alejandro",
+      "id": 4
     },
     {
-      "name": "t.tst",
-      "id": 4
+      "text": "this is my text 3",
+      "name": "My name is cool",
+      "age": 33,
+      "house": false,
+      "id": 3
     }
   ]
 }

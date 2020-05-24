@@ -15,11 +15,11 @@ const handlers = {
       const data = await readFile(DATA_PATH, "utf-8");
       const filesData = JSON.parse(data);
 
-      const fileNames = filesData.files.map((entry) => ({
-        id: entry.id,
-        name: entry.name,
-      }));
-      res.json(fileNames);
+      // const fileNames = filesData.files.map((entry) => ({
+      //   id: entry.id,
+      //   name: entry.name,
+      // }));
+      res.json(filesData.files);
     } catch (err) {
       console.log(err);
 
@@ -99,12 +99,13 @@ const handlers = {
   update: async (req, res) => {
     const idToUpdate = Number(req.params.id);
 
-    _;
-    _;
-    _;
+    const body = req.body;
+
+    body.id = idToUpdate;
+    const isValid = tv4.validate(body, FILES_SCHEMA);
 
     if (!isValid) {
-      _;
+      const error = tv4.error;
       console.error(error);
 
       res.status(400).json({
@@ -119,18 +120,22 @@ const handlers = {
     try {
       const filesDataString = await readFile(DATA_PATH, "utf-8");
       const filesData = JSON.parse(filesDataString);
+      console.log(filesData);
 
       const entryToUpdate = filesData.files.find(
         (file) => file.id === idToUpdate
       );
 
       if (entryToUpdate) {
-        _;
-        _;
+        const index = filesData.files.indexOf(entryToUpdate);
+        filesData.files.splice(index, 1);
 
-        _;
+        const newFile = { ...body };
+        filesData.files.push(newFile);
 
-        _;
+        const newFileDataString = JSON.stringify(filesData, null, "  ");
+
+        await writeFile(DATA_PATH, newFileDataString);
 
         res.json(newFile);
       } else {
