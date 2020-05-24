@@ -153,7 +153,7 @@ const handlers = {
     }
   },
   delete: async (req, res) => {
-    const idToDelete = _;
+    const idToDelete = Number(req.params.id);
 
     try {
       const filesDataString = await readFile(DATA_PATH, "utf-8");
@@ -163,8 +163,9 @@ const handlers = {
         (file) => file.id === idToDelete
       );
 
-      if (_) {
-        _;
+      if (entryToDelete) {
+        const index = filesData.files.indexOf(entryToDelete);
+        filesData.files.splice(index, 1);
 
         const newFileDataString = JSON.stringify(filesData, null, "  ");
 
