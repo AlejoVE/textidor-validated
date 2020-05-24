@@ -60,10 +60,10 @@ const handlers = {
       const filesDataString = await readFile(DATA_PATH, "utf-8");
       const filesData = JSON.parse(filesDataString);
 
-      _;
-      _;
+      newFile.id = filesData.nextId;
+      filesData.nextId++;
 
-      const isValid = _;
+      const isValid = tv4.validate(newFile, FILES_SCHEMA);
 
       if (!isValid) {
         const error = tv4.error;
@@ -82,7 +82,7 @@ const handlers = {
 
       const newFileDataString = JSON.stringify(filesData, null, "  ");
 
-      await _;
+      await writeFile(DATA_PATH, newFileDataString);
 
       res.json(newFile);
     } catch (err) {
