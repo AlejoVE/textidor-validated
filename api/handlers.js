@@ -32,18 +32,15 @@ const handlers = {
     }
   },
   readOne: async (req, res) => {
-    const fileId = _;
-
+    const fileId = parseInt(req.params.id);
     try {
       const filesDataString = await readFile(DATA_PATH, "utf-8");
       const filesData = JSON.parse(filesDataString);
-
-      const entryWithId = filesData.files.find((entry) => _);
-
+      const entryWithId = filesData.files.find((entry) => entry.id === fileId);
       if (entryWithId) {
-        _;
+        res.json(entryWithId);
       } else {
-        res.status(404).end();
+        res.status(404).send("Not found").end();
       }
     } catch (err) {
       console.log(err);
