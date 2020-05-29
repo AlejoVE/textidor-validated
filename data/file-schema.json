@@ -1,28 +1,13 @@
 {
-  "tittle": "Files",
+  "tittle": "new file",
   "type": "object",
   "properties": {
-    "nextId": {
+    "id": {
       "type": "number"
     },
-    "files": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "number"
-          },
-          "name": {
-            "type": "string"
-          },
-          "text": {
-            "type": "string"
-          }
-        },
-        "required": ["id", "name"]
-      }
+    "name": {
+      "type": "string"
     }
   },
-  "require": ["nextId", "files"]
+  "required": ["id", "name"]
 }
